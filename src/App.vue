@@ -1,7 +1,7 @@
 <template>
   <section class="catalog">
     
-    <ProductList :products="products"/>
+    <ProductList/>
 
     <ul class="catalog__pagination pagination">
       <li class="pagination__item">
@@ -50,6 +50,7 @@
 <script>
 import products from "./data/products";
 import ProductList from './components/ProductList.vue'
+import variable from './data/variable'
 
 export default {
   name: "App",
@@ -59,7 +60,19 @@ export default {
   data() {
     return {
       products,
+      variable
     };
+  },
+  methods: {
+    hello() {
+      // for (mes in variable) {
+      //   alert(mes)
+      // }
+      alert(variable.message)
+    }
+  },
+  mounted() {
+    this.hello()
   },
 };
 </script>
