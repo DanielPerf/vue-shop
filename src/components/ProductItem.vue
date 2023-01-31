@@ -1,17 +1,17 @@
 <template>
-  <li class="catalog__item" :products="products">
+  <li class="catalog__item" >
     <a class="catalog__pic" href="#">
-      <img :src="product.image" :alt="product.title" />
+      <img :src="productItem.image" :alt="productItem.title" />
     </a>
 
     <h3 class="catalog__title">
       <a href="#">
-        {{ product.title }}
+        {{ productItem.title }}
       </a>
     </h3>
-
+    
     <span class="catalog__price">
-      {{ product.price }}
+      {{ productItem.price }}
     </span>
 
     <ul class="colors colors--black">
@@ -54,13 +54,13 @@
 </template>
 
 <script>
-import products from '@/data/products'
+
 
 export default {
-    props: ['productsItem'],    
+  props: ['productItem'],
   data() {
     return {
-      products
+      
     };
   },
 };
