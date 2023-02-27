@@ -6,7 +6,7 @@
     </div>
 
     <div class="content__catalog">
-      <ProductFilter :price-from="filterPriceFrom" :price-to="filterPriceTo" :category-id="filterCategoryId"/>
+      <ProductFilter :price-from.sync="filterPriceFrom" :price-to.sync="filterPriceTo" :category-id.sync ="filterCategoryId"/>
       <section class="catalog">
         <ProductList :products="products" />
         <BasePagination
