@@ -2,11 +2,11 @@
   <main class="content container">
     <div class="content__top content__top--catalog">
       <h1 class="content__title">Каталог</h1>
-      <span class="content__info"> 152 товара </span>
+      <span class="content__info"> {{ products.length }} </span>
     </div>
 
     <div class="content__catalog">
-      <ProductFilter :price-from.sync="filterPriceFrom" :price-to.sync="filterPriceTo" :category-id.sync ="filterCategoryId"/>
+      <ProductFilter :price-from.sync="filterPriceFrom" :price-to.sync="filterPriceTo" :category-id.sync ="filterCategoryId" :filter-color.sync="filterProductColor"/>
       <section class="catalog">
         <ProductList :products="products" />
         <BasePagination
@@ -31,13 +31,14 @@ export default {
   components: {
     ProductList,
     BasePagination,
-    ProductFilter
+    ProductFilter,
   },
   data() {
     return {
       filterPriceFrom: 0,
       filterPriceTo: 0,
       filterCategoryId: 0,
+      filterProductColor: '',
       variable,
       page: 1,
       productsPerPage: 3,
@@ -54,6 +55,9 @@ export default {
       }
       if (this.filterCategoryId) {
         filteredProducts = filteredProducts.filter(product => product.categoryId === this.filterCategoryId)
+      }
+      if(this.filterProductColor) {
+        filteredProducts = filteredProducts.filter(product => product.colors.includes(this.filterProductColor))
       }
       return filteredProducts
     },
@@ -74,7 +78,7 @@ export default {
     // }
   },
   mounted() {
-    // this.hello()
+    console.log(products[0].colors.includes('#73b6ea'))
   },
 };
 </script>

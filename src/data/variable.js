@@ -1,4 +1,3 @@
 export default {
-    message: 'hello world',
-    
+    message: 'hello world',    
 }
