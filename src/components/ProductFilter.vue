@@ -151,8 +151,8 @@
 </template>
 
 <script>
-import categories from '../data/categories'
-import colors from '../data/colors'
+import categories from '@/data/categories'
+import colors from '@/data/colors'
 
 export default {
   data() {
