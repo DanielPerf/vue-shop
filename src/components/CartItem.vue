@@ -53,6 +53,7 @@
 import numberFormat from '@/helpers/numberFormat'
 import { mapGetters } from 'vuex'
 import { mapMutations } from 'vuex'
+
 export default {
     props: ['item'],
     
@@ -67,7 +68,7 @@ export default {
                 return this.item.amount
             },
             set(val) {
-                this.$store.commit('updateCartProductAmount', {productId: this.item.productId, amount: val})
+                this.$store.dispatch('updateCartProductAmount', {productId: this.item.productId, amount: val})
             }
         }
     },

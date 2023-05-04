@@ -43,7 +43,7 @@ export default {
       filterPriceFrom: 0,
       filterPriceTo: 0,
       filterCategoryId: 0,
-      filterProductColor: '',
+      filterProductColor: null,
       variable,
       page: 1,
       productsPerPage: 6,
@@ -96,6 +96,9 @@ export default {
     },
     filterCategoryId() {
       this.loadProducts()
+    },
+    filterProductColor() {
+      this.loadProducts()
     }
   },
   methods: {
@@ -115,7 +118,8 @@ export default {
           limit: this.productsPerPage,
           categoryId: this.filterCategoryId,
           minPrice: this.filterPriceFrom,
-          maxPrice: this.filterPriceTo
+          maxPrice: this.filterPriceTo,
+          colorId: this.filterProductColor
         }
       })
       .then(response => this.productsData = response.data)

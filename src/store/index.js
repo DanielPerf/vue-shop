@@ -3,7 +3,7 @@ import Vuex from 'vuex';
 // import products from '@/data/products'
 import axios from 'axios'
 import { API_BASE_URL } from '@/config';
-import { reject, resolve } from 'core-js/fn/promise';
+
 
 Vue.use(Vuex);
 
@@ -16,7 +16,7 @@ export default new Vuex.Store({
     mutations: {
         updateCartProductAmount(state, {productId, amount}) {
             const item = state.cartProducts.find(item => item.productId === productId)
-            if(item) {
+            if (item) {
                 item.amount = amount
             }
         },
@@ -100,6 +100,28 @@ export default new Vuex.Store({
                         context.commit('syncCartProducts')
                     })
             })
+         },
+         updateCartProductAmount(context, {productId, amount}) {
+            context.commit('updateCartProductAmount', {productId, amount})
+            if (amount < 1) {
+                return
+            }
+            return axios
+                    .put(API_BASE_URL + '/api/baskets/products', {
+                        productId: productId,
+                        quantity: amount
+                    }, 
+                    {
+                        params: {
+                            userAccessKey: context.state.userAccessKey
+                        }
+                    })
+                    .then(response => {
+                        context.commit('updateCartProductsData', response.data.items)                             
+                    })
+                    .catch(() => {
+                        context.commit('syncCartProducts')
+                    })
          }
     }
 });
