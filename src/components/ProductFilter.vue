@@ -33,16 +33,16 @@
       <fieldset class="form__block">
         <legend class="form__legend">Цвет</legend>
         <ul class="colors">
-          <li class="colors__item" v-for="color in res" :key="color['background-color']">
+          <li class="colors__item" v-for="color in colors" :key="color.id">
             <label class="colors__label">
               <input
                 class="colors__radio sr-only"
                 type="radio"
                 name="color"
-                :value="color"
+                :value="color.id"
                 v-model="checkedColor"
               />
-              <span class="colors__value" :style="color">
+              <span class="colors__value" :style="color.code">
               </span>
             </label>
           </li>
@@ -166,7 +166,6 @@ export default {
       checkedColor: null,
       categoriesData: null,
       colorsData: null,
-      res: []
     }
   },
   props: ['priceFrom', 'priceTo', 'categoryId', 'filterColor'],
@@ -204,6 +203,7 @@ export default {
     },
     colors(val) {
       console.log(val)
+      console.log(this.colorsData.items)
     }
   },
   methods : {
@@ -226,18 +226,11 @@ export default {
     loadColors() {
         axios.get(API_BASE_URL + '/api/colors')
         .then(response => this.colorsData = response.data)
-    },
-    takeColorCode() {
-      return this.colors.map(color => this.res.push(color.code))      
-      }
+    }
   },
   created() {
     this.loadCategory()
     this.loadColors()
-    setTimeout(() => {
-      this.takeColorCode() 
-      console.log(this.res)      
-    }, 5000)
   },
   mounted() {  
 

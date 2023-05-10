@@ -8,7 +8,7 @@
     <div class="content__catalog">
       <ProductFilter :price-from.sync="filterPriceFrom" :price-to.sync="filterPriceTo" :category-id.sync ="filterCategoryId" :filter-color.sync="filterProductColor"/>
       <section class="catalog">
-        <div class="" v-if="loadProducts">Загрузка товаров...</div>
+        <div class="loader" v-if="loading"></div>
         <div class="" v-if="productsLoadingError">Ошибка загрузки товаров<button @click.prevent="loadProducts">Попробовать еще раз</button></div>
         <ProductList :products="products" />
         <BasePagination
@@ -109,8 +109,9 @@ export default {
     //   alert(variable.message)
     // }
     loadProducts() {
-      this.loading = true
       clearTimeout(this.loadProductsTimer)
+      this.loading = true
+      this.productsLoadingError = false
       this.loadProductsTimer = setTimeout(() => {
        axios.get(API_BASE_URL + '/api/products', {
         params: {
@@ -125,6 +126,7 @@ export default {
       .then(response => this.productsData = response.data)
       .catch(() => this.productsLoadingError = true)
       .then(() => this.loading = false)
+      
     }, 3000)
     }
   },

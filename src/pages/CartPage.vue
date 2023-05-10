@@ -1,36 +1,30 @@
 <template>
+  <div class="">
+    <div class="loader" ></div>
     <main class="content container">
     <div class="content__top">
       <ul class="breadcrumbs">
         <li class="breadcrumbs__item">
-          <a class="breadcrumbs__link" href="index.html">
-            Каталог
-          </a>
+          <a class="breadcrumbs__link" href="index.html"> Каталог </a>
         </li>
         <li class="breadcrumbs__item">
-          <a class="breadcrumbs__link">
-            Корзина
-          </a>
+          <a class="breadcrumbs__link"> Корзина </a>
         </li>
       </ul>
 
-      <h1 class="content__title">
-        Корзина
-      </h1>
-      <span class="content__info">
-        3 товара
-      </span>
+      <h1 class="content__title">Корзина</h1>
+      <span class="content__info"> 3 товара </span>
     </div>
 
     <section class="cart">
       <form class="cart__form form" action="#" method="POST">
         <div class="cart__field">
           <ul class="cart__list">
-            <CartItem v-for="item in products" :key="item.productId" :item="item"/>
-
-            
-
-            
+            <CartItem
+              v-for="item in products"
+              :key="item.productId"
+              :item="item"
+            />
           </ul>
         </div>
 
@@ -49,27 +43,31 @@
       </form>
     </section>
   </main>
+  </div>
+  
+  
 </template>
 
 <script>
-import numberFormat from '@/helpers/numberFormat';
-import { mapGetters } from 'vuex';
-import CartItem from '@/components/CartItem.vue'
+import numberFormat from "@/helpers/numberFormat";
+import { mapGetters } from "vuex";
+import CartItem from "@/components/CartItem.vue";
 
 export default {
   components: {
-    CartItem
+    CartItem,
   },
-    data() {
-        return {
-            
-        }
-    },
-    filters: {
-      numberFormat
-    },
-    computed: {
-      ...mapGetters({products: 'cartDetailProducts', totalPrice: 'cartTotalPrice'}),
-    }
-}
+  data() {
+    return {};
+  },
+  filters: {
+    numberFormat,
+  },
+  computed: {
+    ...mapGetters({
+      products: "cartDetailProducts",
+      totalPrice: "cartTotalPrice",
+    }),
+  },
+};
 </script>

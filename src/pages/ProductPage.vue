@@ -1,7 +1,7 @@
 <template>
   <div class="">
-    <div class="" v-if="productLoading">Загрузка товара...</div>
-    <div class="" v-else-if="!productsData">Не удалось загрузить товар</div>
+    <span class="loader" v-if="productLoading"></span>
+    <span class="" v-else-if="!productsData">Не удалось загрузить товар</span>
     <main class="content container" v-else>
       <div class="content__top">
         <ul class="breadcrumbs">
@@ -26,9 +26,7 @@
         <div class="item__pics pics">
           <div class="pics__wrapper">
             <img
-              width="570"
-              height="570"
-              :src="product.image"
+              :src="product.image.file.url"
               :alt="product.title"
             />
           </div>
@@ -289,13 +287,16 @@ export default {
       })
     },
     loadProduct() {
+      clearTimeout(this.loadingTimer)
       this.productLoading = true;
       this.productError = false;
-      axios
+      this.loadingTimer = setTimeout(() => {
+        axios
         .get(API_BASE_URL + "/api/products/" + this.$route.params.id)
         .then((response) => (this.productsData = response.data))
         .catch(() => (this.productError = true))
         .then(() => (this.productLoading = false));
+      },2000);
     },
   },
   // created() {

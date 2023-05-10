@@ -2,7 +2,7 @@
   <li class="cart__item product">
     <div class="product__pic">
       <img
-        :src="item.product.image"
+        :src="item.product.image.file.url"
         width="120"
         height="120"
         alt="Название товара"
