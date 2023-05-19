@@ -42,7 +42,7 @@
                 :value="color.id"
                 v-model="checkedColor"
               />
-              <span class="colors__value" :style="color.code">
+              <span class="colors__value" :style="{'background-color': color.code}">
               </span>
             </label>
           </li>

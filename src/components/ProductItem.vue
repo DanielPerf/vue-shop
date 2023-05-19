@@ -25,7 +25,7 @@
             :value="color"
             
           />
-          <span class="colors__value" :style="{color: color.code}"></span>
+          <span class="colors__value" :style="{'background-color': color.code}"></span>
         </label>
       </li>
     </ul>

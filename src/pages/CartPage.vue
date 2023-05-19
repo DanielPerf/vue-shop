@@ -1,20 +1,20 @@
 <template>
   <div class="">
-    <div class="loader" ></div>
     <main class="content container">
-    <div class="content__top">
-      <ul class="breadcrumbs">
-        <li class="breadcrumbs__item">
-          <a class="breadcrumbs__link" href="index.html"> Каталог </a>
-        </li>
-        <li class="breadcrumbs__item">
-          <a class="breadcrumbs__link"> Корзина </a>
-        </li>
-      </ul>
-
-      <h1 class="content__title">Корзина</h1>
-      <span class="content__info"> 3 товара </span>
-    </div>
+      <div class="content__top">
+        <ul class="breadcrumbs">
+          <li class="breadcrumbs__item">
+            <a class="breadcrumbs__link" href="index.html"> Каталог </a>
+          </li>
+          <li class="breadcrumbs__item">
+            <a class="breadcrumbs__link"> Корзина </a>
+          </li>
+        </ul>
+        
+        <h1 class="content__title">Корзина</h1>
+        <span class="content__info"> 3 товара </span>
+      </div>
+      <div class="loader" ></div>
 
     <section class="cart">
       <form class="cart__form form" action="#" method="POST">
@@ -36,9 +36,9 @@
             Итого: <span>{{ totalPrice | numberFormat }} ₽</span>
           </p>
 
-          <button class="cart__button button button--primery" type="submit">
+          <router-link tag="button" :to="{name: 'order'}" class="cart__button button button--primery" type="submit">
             Оформить заказ
-          </button>
+          </router-link>
         </div>
       </form>
     </section>
@@ -52,6 +52,7 @@
 import numberFormat from "@/helpers/numberFormat";
 import { mapGetters } from "vuex";
 import CartItem from "@/components/CartItem.vue";
+
 
 export default {
   components: {
@@ -68,6 +69,6 @@ export default {
       products: "cartDetailProducts",
       totalPrice: "cartTotalPrice",
     }),
-  },
+  }
 };
 </script>
